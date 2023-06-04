@@ -1,0 +1,388 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/dkd99/my-code-practice/blob/main/iterators%20and%20itertools%20and%20datetime\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "class Sentence:\n",
+        "\n",
+        "    def __init__(self, sentence):\n",
+        "        self.sentence = sentence\n",
+        "        self.index = 0\n",
+        "        self.words = self.sentence.split()\n",
+        "\n",
+        "    def __iter__(self):\n",
+        "        return self\n",
+        "\n",
+        "    def __next__(self):\n",
+        "        if self.index >= len(self.words):\n",
+        "            raise StopIteration\n",
+        "        index = self.index\n",
+        "        self.index += 1\n",
+        "        return self.words[index]\n",
+        "\n",
+        "\n",
+        "def sentence(sentence):\n",
+        "    for word in sentence.split():\n",
+        "        yield word\n",
+        "\n",
+        "\n",
+        "my_sentence = sentence('This is a test')\n",
+        "\n",
+        "# for word in my_sentence:\n",
+        "#     print(word)\n",
+        "\n",
+        "print(next(my_sentence))\n",
+        "print(next(my_sentence))\n",
+        "print(next(my_sentence))\n",
+        "print(next(my_sentence))\n",
+        "print(next(my_sentence))\n",
+        "\n",
+        "\n",
+        "# This should have the following output:\n",
+        "# This\n",
+        "# is\n",
+        "# a\n",
+        "# test\n"
+      ],
+      "metadata": {
+        "id": "TrCUP-LEfSU6",
+        "outputId": "91a58d79-b84a-4af4-f5c4-3b1f9caa4807",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 304
+        }
+      },
+      "execution_count": 1,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "This\n",
+            "is\n",
+            "a\n",
+            "test\n"
+          ]
+        },
+        {
+          "output_type": "error",
+          "ename": "StopIteration",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mStopIteration\u001b[0m                             Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-1-fe48bd6adfb6>\u001b[0m in \u001b[0;36m<cell line: 33>\u001b[0;34m()\u001b[0m\n\u001b[1;32m     31\u001b[0m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mnext\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmy_sentence\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     32\u001b[0m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mnext\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmy_sentence\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 33\u001b[0;31m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mnext\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmy_sentence\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     34\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     35\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mStopIteration\u001b[0m: "
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "class Sentence:\n",
+        "\n",
+        "    def __init__(self, sentence):\n",
+        "        self.sentence = sentence\n",
+        "        self.index = 0\n",
+        "        self.words = self.sentence.split()\n",
+        "\n",
+        "    def __iter__(self):\n",
+        "        return self\n",
+        "\n",
+        "    def __next__(self):\n",
+        "        if self.index >= len(self.words):\n",
+        "            raise StopIteration\n",
+        "        index = self.index\n",
+        "        self.index += 1\n",
+        "        return self.words[index]\n",
+        "\n",
+        "\n",
+        "def sentence(sentence):\n",
+        "    for word in sentence.split():\n",
+        "        yield word\n",
+        "\n",
+        "\n",
+        "my_sentence = sentence('This is a test')\n",
+        "\n",
+        "# for word in my_sentence:\n",
+        "#     print(word)\n",
+        "\n",
+        "print(next(my_sentence))\n",
+        "print(next(my_sentence))\n",
+        "print(next(my_sentence))\n",
+        "print(next(my_sentence))\n",
+        "print(next(my_sentence))\n",
+        "\n",
+        "\n",
+        "# This should have the following output:\n",
+        "# This\n",
+        "# is\n",
+        "# a\n",
+        "# test\n"
+      ],
+      "metadata": {
+        "id": "meLVA6BTfbF1",
+        "outputId": "56bcbe92-b6db-4e9b-ac80-7d346395729b",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 304
+        }
+      },
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "This\n",
+            "is\n",
+            "a\n",
+            "test\n"
+          ]
+        },
+        {
+          "output_type": "error",
+          "ename": "StopIteration",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mStopIteration\u001b[0m                             Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-2-fe48bd6adfb6>\u001b[0m in \u001b[0;36m<cell line: 33>\u001b[0;34m()\u001b[0m\n\u001b[1;32m     31\u001b[0m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mnext\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmy_sentence\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     32\u001b[0m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mnext\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmy_sentence\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 33\u001b[0;31m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mnext\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmy_sentence\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     34\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     35\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mStopIteration\u001b[0m: "
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "a=[1,2,3,4]\n",
+        "print(dir(a))"
+      ],
+      "metadata": {
+        "id": "8_ziPCWDgJXD",
+        "outputId": "6ffd85fa-8c4e-4555-d381-a82eb2b0794b",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "['__add__', '__class__', '__class_getitem__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(dir(a.__iter__()))"
+      ],
+      "metadata": {
+        "id": "fBxNEnuUgSMK",
+        "outputId": "84b65508-68f4-4333-dfb5-feb1691e33a2",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "['__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__length_hint__', '__lt__', '__ne__', '__new__', '__next__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "iterator=iter(a)"
+      ],
+      "metadata": {
+        "id": "p1bh787qhlhk"
+      },
+      "execution_count": 10,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "next(iterator)"
+      ],
+      "metadata": {
+        "id": "zNwu3UXlhqhL",
+        "outputId": "56b61a18-5bf3-45f2-a1ca-ba9a5ebe4bd7",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 11,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "1"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 11
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "next(iterator)\n",
+        "next(iterator)\n",
+        "next(iterator)"
+      ],
+      "metadata": {
+        "id": "gMJZKY3MhvGX",
+        "outputId": "a8ad38fe-e59b-4997-d4fb-ee78dc7901e9",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "4"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 12
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import datetime\n",
+        "import pytz\n",
+        "\n",
+        "# Naive\n",
+        "# d = datetime.date(2001, 9, 11)\n",
+        "\n",
+        "tday = datetime.date.today()\n",
+        "\n",
+        "\n",
+        "# weekday() - Monday is 0 and Sunday is 6\n",
+        "# print(tday)\n",
+        "\n",
+        "# isoweekday() - Monday is 1 and Sunday is 7\n",
+        "# print(tday)\n",
+        "\n",
+        "\n",
+        "# datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)\n",
+        "\n",
+        "tdelta = datetime.timedelta(hours=12)\n",
+        "\n",
+        "# print(tday + tdelta)\n",
+        "\n",
+        "# date2 = date1 + timedelta\n",
+        "# timedelta = date1 + date2\n",
+        "\n",
+        "bday = datetime.date(2016, 9, 24)\n",
+        "\n",
+        "till_bday = bday - tday\n",
+        "\n",
+        "# print(till_bday.days)\n",
+        "\n",
+        "t = datetime.time(9, 30, 45, 100000)\n",
+        "\n",
+        "# dt = datetime.datetime.today()\n",
+        "# dtnow = datetime.datetime.now()\n",
+        "# print(dir(datetime.datetime))\n",
+        "# print(dt)\n",
+        "# print(dtnow)\n",
+        "\n",
+        "dt = datetime.datetime(2016, 7, 24, 12, 30, 45, tzinfo=pytz.UTC)\n",
+        "# print(dir(dt))\n",
+        "\n",
+        "dt_utcnow = datetime.datetime.now(tz=pytz.UTC)\n",
+        "# print(dt_utcnow)\n",
+        "\n",
+        "dt_utcnow2 = datetime.datetime.utcnow().replace(tzinfo=pytz.UTC)\n",
+        "# print(dt_utcnow2)\n",
+        "\n",
+        "# dt_mtn = dt_utcnow.astimezone(pytz.timezone('US/Mountain'))\n",
+        "# print(dt_mtn)\n",
+        "\n",
+        "dt_mtn = datetime.datetime.now()\n",
+        "\n",
+        "mtn_tz = pytz.timezone('US/Mountain')\n",
+        "dt_mtn = mtn_tz.localize(dt_mtn)\n",
+        "\n",
+        "# print(dt_mtn)\n",
+        "\n",
+        "dt_east = dt_mtn.astimezone(pytz.timezone('US/Eastern'))\n",
+        "# print(dt_east)\n",
+        "\n",
+        "print(dt_mtn.strftime('%B %d, %Y'))\n",
+        "\n",
+        "dt_str = 'July 24, 2016'\n",
+        "dt = datetime.datetime.strptime(dt_str, '%B %d, %Y')\n",
+        "print(dt)\n",
+        "\n",
+        "# strftime - Datetime to String\n",
+        "# strptime - String to Datetime\n"
+      ],
+      "metadata": {
+        "id": "NEsfmn-PeH5e",
+        "outputId": "2cb36c9f-4ab4-4bde-ccc5-2d8524974853",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 1,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "June 04, 2023\n",
+            "2016-07-24 00:00:00\n"
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "name": "Welcome To Colaboratory",
+      "toc_visible": true,
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
